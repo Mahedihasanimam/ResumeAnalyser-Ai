@@ -8,6 +8,17 @@ const nextConfig: NextConfig = {
   // This helps prevent ESM/CJS mix-up issues with older libraries.
   transpilePackages: ["pdfjs-dist"],
 
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "api.dicebear.com",
+        port: "",
+        pathname: "/**",
+      },
+    ],
+  },
+
   // 2. Add 'pdfjs-dist' to this list if you were calling the API route
   // from a Server Component, but since you're using a Client Component/Route Handler
   // setup, we'll focus on the 'nodejs' runtime fix instead of relying on

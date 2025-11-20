@@ -924,7 +924,7 @@ export default function ResumeUpload() {
                 .animation-delay-4000 { animation-delay: 4s; }
             `}</style>
 
-            <div className="relative  bg-white flex flex-col items-center p-4 sm:p-8 overflow-hidden">
+            <div id="ResumeUp" className="relative  bg-white flex flex-col items-center p-4 sm:p-8 overflow-hidden">
                 {/* Subtle Google-style background elements */}
                 <div className="absolute top-10 right-10 w-48 h-48 bg-[#4285F4]/5 rounded-full mix-blend-multiply filter blur-3xl opacity-10"></div>
                 <div className="absolute bottom-10 left-10 w-56 h-56 bg-[#34A853]/5 rounded-full mix-blend-multiply filter blur-3xl opacity-10"></div>
