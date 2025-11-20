@@ -13,8 +13,6 @@ export default function Page() {
       <section className="px-4 pb-16">
         <ResumeUpload />
       </section>
-
-      <Footer />
     </div>
   );
 }

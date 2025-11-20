@@ -1,22 +1,30 @@
 // components/Footer.tsx
 import Image from 'next/image';
 import React from 'react'
+import GoogleTranslate from './GoogleTranslate';
+import LanguageSelector from './LanguageSelector';
 
 const Footer: React.FC = () => {
     return (
         <footer className="bg-gray-50 border-t border-gray-200 mt-12 pt-12 pb-8 w-full">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
 
                     {/* 1. Logo & Branding - Google Style */}
                     <div className="col-span-2 lg:col-span-1">
                         <div className="flex items-center space-x-3 mb-3">
+
                             <Image src="/googlelogo.png" alt="Google Logo" width={180} height={180} />
 
                         </div>
-                        <p className="text-sm text-gray-600">
-                            গুগল AI টেকনোলজি দ্বারা পাওয়ার্ড
-                        </p>
+
+                        <div>
+                            <p className="text-sm text-gray-600">
+                                গুগল AI টেকনোলজি দ্বারা পাওয়ার্ড
+                            </p>
+
+                        </div>
                     </div>
 
                     {/* 2. Product Links - Bengali */}
@@ -68,6 +76,12 @@ const Footer: React.FC = () => {
                                     <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z" />
                                 </svg>
                             </a>
+                        </div>
+                        <div className='container mx-auto mt-4'>
+                            <div className='hidden'>
+                                <GoogleTranslate />
+                            </div>
+                            <LanguageSelector />
                         </div>
                     </div>
                 </div>
