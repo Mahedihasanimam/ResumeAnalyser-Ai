@@ -157,7 +157,7 @@ export const HeroSection: React.FC = () => {
                         <div className="w-1.5 h-1.5 bg-[#34A853] rounded-full"></div>
                     </div>
                     <span className="text-xs font-medium text-gray-600">
-                        বাংলাদেশের জন্য তৈরি
+                        বিশ্বব্যাপী ব্যবহারযোগ্য
                     </span>
                 </div>
 
