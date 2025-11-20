@@ -137,7 +137,7 @@ import React from 'react';
 
 export const HeroSection: React.FC = () => {
     return (
-        <div className="relative bg-white rounded-lg p-8 sm:p-12 mb-8 overflow-hidden border border-gray-200">
+        <div className="relative bg-white rounded-lg p-8 sm:p-12  overflow-hidden border border-gray-200">
             {/* Google-style minimal background */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-[#4285F4]/5 rounded-full mix-blend-multiply filter blur-3xl opacity-10"></div>
             <div className="absolute bottom-0 left-0 w-56 h-56 bg-[#34A853]/5 rounded-full mix-blend-multiply filter blur-3xl opacity-10"></div>
