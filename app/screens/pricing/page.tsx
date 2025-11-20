@@ -61,7 +61,7 @@ function PricingPage() {
         const platformLink = window.location.origin || 'আপনার_প্ল্যাটফর্মের_লিঙ্ক';
         const shareText = `আমি এই অত্যাধুনিক, সম্পূর্ণ বিনামূল্যে CV Analyzer প্ল্যাটফর্মটি ব্যবহার করে আমার ক্যারিয়ারে উন্নতি এনেছি! আপনিও ব্যবহার করুন: ${platformLink}`;
 
-        const handleClipboardCopy = (text) => {
+        const handleClipboardCopy = (text: string) => {
             const input = document.createElement('textarea');
             input.value = text;
             document.body.appendChild(input);
@@ -159,8 +159,8 @@ function PricingPage() {
                             <a
                                 href={`/analyze`}
                                 className={`mt-6 w-full py-3 px-4 text-center rounded-lg font-medium transition-colors duration-200 ${tier.isRecommended
-                                        ? 'bg-[#1a73e8] text-white hover:bg-[#1967d2]'
-                                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-300'
+                                    ? 'bg-[#1a73e8] text-white hover:bg-[#1967d2]'
+                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-300'
                                     }`}
                             >
                                 {tier.buttonText}
