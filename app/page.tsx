@@ -1,6 +1,5 @@
 'use client';
 import { useEffect } from "react";
-import Footer from "@/components/Footer";
 import { HeroSection } from "@/components/Hero";
 import ResumeUpload from "@/components/ResuemUpload";
 import React from "react";
