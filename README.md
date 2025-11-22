@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Introducing the Smart Resume Checker — Your AI-Powered Career Booster!
 
-## Getting Started
+আপনার CV কি ইন্টারভিউ পাওয়ার মতো শক্তিশালী?
+এবার আর আন্দাজ না—AI বলবে ঠিক কোথায় সমস্যা!
 
-First, run the development server:
+❏ Smart Resume Checker
+এক ক্লিকে জেনে নিন আপনার রেজিউমের score, strengths, এবং কীভাবে আরও উন্নত করতে পারবেন।
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+❏ মূল ফিচারগুলো
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+➤ AI Resume Analysis — আপনার CV পড়ে স্কোর দেবে ও ভুলগুলো ধরিয়ে দেবে।
+⚡ Instant Suggestions — প্রফেশনাল স্ট্যান্ডার্ড অনুযায়ী উন্নতির জন্য টিপস পাবেন।
+➤ Skill & Keyword Insights — HR যেসব স্কিল খুঁজছে সেগুলো আপনার রেজিউমে আছে কিনা AI জানাবে।
+➤ Unlimited Uploads — অসংখ্য রেজিউম test করতে পারবেন।
+➤ Mobile Friendly — ফোন, ট্যাব, ল্যাপটপ—সব ডিভাইসে কাজ করে।
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+❏ কারা ব্যবহার করবেন?
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Fresher যারা প্রথমবার রেজিউম বানাচ্ছেন
 
-## Learn More
+Developers, Designers, Marketers
 
-To learn more about Next.js, take a look at the following resources:
+Job Seekers যারা ATS-friendly CV চান
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Career Coaches / HR Professionals
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+❏ কেন ব্যবহার করবেন?
 
-## Deploy on Vercel
+কারণ আপনার একটি ভালো রেজিউম = আরও বেশি ইন্টারভিউ কল।
+এবং Smart Resume Checker আপনাকে দেখিয়ে দেবে—
+"How Recruiters Actually See Your Resume."
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+🖥 Try Now — It’s FREE!
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+এক ক্লিকে রেজিউম আপলোড করুন এবং
+আপনার Career Upgrade শুরু করুন!

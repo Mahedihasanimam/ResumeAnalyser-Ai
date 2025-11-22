@@ -2,11 +2,14 @@
 
 import { useEffect } from 'react';
 
-// Extend window type for Google Translate
 declare global {
     interface Window {
         googleTranslateElementInit?: () => void;
-        google?: any;
+        google?: {
+            translate: {
+                TranslateElement: new (options: { pageLanguage: string }, elementId: string) => void;
+            };
+        };
     }
 }
 
@@ -19,10 +22,12 @@ const GoogleTranslate = () => {
             document.body.appendChild(script);
 
             window.googleTranslateElementInit = () => {
-                new window.google.translate.TranslateElement(
-                    { pageLanguage: 'en' },
-                    'google_translate_element'
-                );
+                if (window.google) {
+                    new window.google.translate.TranslateElement(
+                        { pageLanguage: 'en' },
+                        'google_translate_element'
+                    );
+                }
             };
         };
 

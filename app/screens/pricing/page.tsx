@@ -53,9 +53,14 @@ const pricingTiers = [
 ];
 
 function PricingPage() {
-    const [shareStatus, setShareStatus] = useState({ key: null, message: 'বন্ধুদের সাথে শেয়ার করুন', color: 'text-[#1a73e8]' });
+    const [shareStatus, setShareStatus] = useState<{ key: string | null; message: string; color: string }>({
+        key: null,
+        message: 'বন্ধুদের সাথে শেয়ার করুন',
+        color: 'text-[#1a73e8]',
+    });
 
-    const handleShare = (e, tierName = 'footer') => {
+
+    const handleShare = (e: React.MouseEvent<HTMLButtonElement>, tierName = 'footer') => {
         e.preventDefault();
 
         const platformLink = window.location.origin || 'আপনার_প্ল্যাটফর্মের_লিঙ্ক';

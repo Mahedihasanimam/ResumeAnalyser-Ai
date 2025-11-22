@@ -4,6 +4,7 @@ import type { NextConfig } from "next";
 
 /** @type {import('next').NextConfig} */
 const nextConfig: NextConfig = {
+  turbopack: {},
   // 1. Specify which packages need forced CommonJS transpilation
   // This helps prevent ESM/CJS mix-up issues with older libraries.
   transpilePackages: ["pdfjs-dist"],
