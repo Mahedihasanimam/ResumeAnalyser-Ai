@@ -516,11 +516,525 @@
 //         </>
 //     );
 // }
+
+
+
+// 'use client'
+// import React, { useState } from "react";
+// import { Check, Loader2, FileText, UploadCloud, XCircle, BarChart2, Zap, Lightbulb } from 'lucide-react';
+
+// // --- Type Definitions (Unchanged) ---
+// interface AnalysisResult {
+//     summaryScore: number;
+//     strengths: string[];
+//     weaknesses: string[];
+//     matchingRoles: string[];
+//     detailedAnalysis: {
+//         atsCompatibility: number;
+//         contentQuality: number;
+//         keywordOptimization: number;
+//         structure: number;
+//         impactMetrics: number;
+//     };
+//     improvementSuggestions: {
+//         suggestion: string;
+//         reason: string;
+//         example: string;
+//         priority: "high" | "medium" | "low";
+//     }[];
+//     redFlags: {
+//         issue: string;
+//         impact: string;
+//         solution: string;
+//     }[];
+// }
+
+// interface UploadState {
+//     result: AnalysisResult | null;
+//     error: string | undefined;
+// }
+
+// interface CheckItem {
+//     id: string;
+//     label: string;
+//     completed: boolean;
+// }
+
+// const initialState: UploadState = {
+//     result: null,
+//     error: undefined,
+// };
+
+// // --- Main Component ---
+// export default function ResumeUpload() {
+//     const [file, setFile] = useState<File | null>(null);
+//     const [analyzing, setAnalyzing] = useState<boolean>(false);
+//     const [uploadState, setUploadState] = useState<UploadState>(initialState);
+//     const [checkItems, setCheckItems] = useState<CheckItem[]>([]);
+//     const [currentCheckIndex, setCurrentCheckIndex] = useState<number>(0);
+
+//     const analysisChecklist: CheckItem[] = [
+//         { id: "file-format", label: "PDF ফাইল ফরম্যাট চেক করা হচ্ছে", completed: false },
+//         { id: "text-extraction", label: "রিজিউমি টেক্সট এক্সট্র্যাক্ট করা হচ্ছে", completed: false },
+//         { id: "ats-scan", label: "ATS কম্প্যাটিবিলিটি স্ক্যান", completed: false },
+//         { id: "keyword-analysis", label: "কীওয়ার্ড ও অপ্টিমাইজেশন এনালাইসিস", completed: false },
+//         { id: "structure-check", label: "স্ট্রাকচার ও ফরম্যাটিং চেক", completed: false },
+//         { id: "content-quality", label: "কন্টেন্ট কোয়ালিটি অ্যাসেসমেন্ট", completed: false },
+//         { id: "impact-metrics", label: "ইমপ্যাক্ট মেট্রিক্স এনালাইসিস", completed: false },
+//         { id: "role-matching", label: "জব রোল ম্যাচিং", completed: false },
+//         { id: "final-scoring", label: "ফাইনাল স্কোরিং ও রিপোর্ট জেনারেট", completed: false },
+//     ];
+
+//     // Initialize checklist when component mounts
+//     React.useEffect(() => {
+//         setCheckItems(analysisChecklist.map(item => ({ ...item, completed: false })));
+//     }, []);
+
+//     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//         const selected = e.target.files && e.target.files[0];
+//         if (selected && selected.type !== 'application/pdf') {
+//             setUploadState({ result: null, error: "শুধুমাত্র PDF ফাইল সাপোর্টেড" });
+//             setFile(null);
+//             return;
+//         }
+//         setFile(selected);
+//         setUploadState(initialState);
+//         setCheckItems(analysisChecklist.map(item => ({ ...item, completed: false })));
+//         setCurrentCheckIndex(0);
+//     };
+
+//     const simulateCheckProgress = async () => {
+//         for (let i = 0; i < analysisChecklist.length; i++) {
+//             await new Promise(resolve => setTimeout(resolve, 300 + Math.random() * 400));
+//             setCurrentCheckIndex(i);
+//             setCheckItems(prev =>
+//                 prev.map((item, index) =>
+//                     index <= i ? { ...item, completed: true } : item
+//                 )
+//             );
+//         }
+//     };
+
+//     const handleAnalyze = async () => {
+//         if (!file) {
+//             setUploadState({ result: null, error: "দয়া করে প্রথমে আপনার রিজিউমি PDF আপলোড করুন" });
+//             return;
+//         }
+
+//         setAnalyzing(true);
+//         setUploadState(initialState);
+//         setCheckItems(analysisChecklist.map(item => ({ ...item, completed: false })));
+//         setCurrentCheckIndex(0);
+
+//         try {
+//             await simulateCheckProgress();
+
+//             // --- Simulation (Replace with actual fetch calls) ---
+//             const simulateAnalysisResult: AnalysisResult = {
+//                 summaryScore: 88,
+//                 strengths: [
+//                     "জব মার্কেটের জন্য প্রাসঙ্গিক শক্তিশালী কীওয়ার্ড",
+//                     "স্পষ্ট এবং সংক্ষিপ্ত প্রোফেশনাল সামারি",
+//                     "কাজের অভিজ্ঞতায় পরিমাপযোগ্য অর্জন (কোয়ান্টিফায়েড রেজাল্ট)",
+//                     "প্রযুক্তিগত দক্ষতা ভালোভাবে ও সুগঠিতভাবে উপস্থাপন",
+//                 ],
+//                 weaknesses: [
+//                     "কিছু বুলেট পয়েন্টে আরও নির্দিষ্ট মেট্রিক্স যোগ করা যেতে পারে",
+//                     "কিছু অংশে বাক্য গঠন আরও সংক্ষিপ্ত করা প্রয়োজন",
+//                 ],
+//                 matchingRoles: [
+//                     "সিনিয়র সফটওয়্যার ইঞ্জিনিয়ার",
+//                     "ডাটা আর্কিটেক্ট",
+//                     "টেক লিড",
+//                     "AI/ML ইঞ্জিনিয়ার",
+//                     "ক্লাউড সলিউশন কনসালটেন্ট",
+//                 ],
+//                 detailedAnalysis: {
+//                     atsCompatibility: 92,
+//                     contentQuality: 85,
+//                     keywordOptimization: 90,
+//                     structure: 88,
+//                     impactMetrics: 78
+//                 },
+//                 improvementSuggestions: [
+//                     {
+//                         suggestion: "স্কিলের সাথে প্রজেক্ট লিঙ্ক করুন",
+//                         reason: "স্কিলগুলি বাস্তবে কীভাবে ব্যবহার করেছেন তা দেখানো হয়নি",
+//                         example: "'Node.js' ব্যবহার করে একটি 'Scalable API Gateway' তৈরির প্রজেক্ট যোগ করুন",
+//                         priority: "medium"
+//                     },
+//                     {
+//                         suggestion: "কাস্টমাইজড সামারি লিখুন",
+//                         reason: "প্রতিটি জবের জন্য সামারি কাস্টমাইজ করলে ATS স্কোর বাড়ে",
+//                         example: "জব ডেস্ক্রিপশন থেকে মূল কীওয়ার্ডগুলি সামারিতে ব্যবহার করুন",
+//                         priority: "low"
+//                     }
+//                 ],
+//                 redFlags: [
+//                     {
+//                         issue: "শিক্ষাগত যোগ্যতার তারিখ উল্টোপাল্টা",
+//                         impact: "রিক্রুটাররা বিভ্রান্ত হয়, প্রফেশনালিজম প্রশ্নবিদ্ধ হতে পারে",
+//                         solution: "সর্বশেষ ডিগ্রি প্রথমে রেখে ক্রমানুসারে সাজান (Reverse Chronological)"
+//                     },
+//                 ]
+//             };
+
+//             await new Promise(resolve => setTimeout(resolve, 1000));
+//             setUploadState({ result: simulateAnalysisResult, error: undefined });
+
+//         } catch (err: unknown) {
+//             const message = err instanceof Error ? err.message : String(err);
+//             setUploadState({ result: null, error: message || "বিশ্লেষণের সময় একটি অপ্রত্যাশিত ত্রুটি ঘটেছে" });
+//         } finally {
+//             setAnalyzing(false);
+//         }
+//     };
+
+//     // --- Updated Google-style Checklist Sidebar ---
+//     const renderChecklistSidebar = (isAnalyzing: boolean) => (
+//         <div className="bg-white rounded-xl p-6 border border-gray-200 h-full">
+//             <h4 className="text-lg font-medium text-gray-900 mb-4 flex items-center">
+//                 <BarChart2 className="w-5 h-5 mr-2 text-[#1a73e8]" />
+//                 বিশ্লেষণ প্রক্রিয়া
+//             </h4>
+//             <div className="space-y-3">
+//                 {checkItems.map((item, index) => (
+//                     <div key={item.id} className="flex items-center">
+//                         <div className={`w-6 h-6 rounded-full flex items-center justify-center mr-3 flex-shrink-0 ${item.completed
+//                             ? "bg-[#34A853]"
+//                             : isAnalyzing && index === currentCheckIndex
+//                                 ? "bg-[#1a73e8]"
+//                                 : "bg-gray-200"
+//                             }`}>
+//                             {item.completed ? (
+//                                 <Check className="w-4 h-4 text-white" />
+//                             ) : isAnalyzing && index === currentCheckIndex ? (
+//                                 <Loader2 className="w-4 h-4 text-white animate-spin" />
+//                             ) : (
+//                                 <span className="text-sm text-gray-500">
+//                                     {index + 1}
+//                                 </span>
+//                             )}
+//                         </div>
+//                         <span className={`text-sm ${item.completed
+//                             ? "text-[#34A853] font-medium"
+//                             : isAnalyzing && index === currentCheckIndex
+//                                 ? "text-[#1a73e8] font-medium"
+//                                 : "text-gray-600"
+//                             }`}>
+//                             {item.label}
+//                         </span>
+//                     </div>
+//                 ))}
+//             </div>
+//             {isAnalyzing && (
+//                 <div className="mt-4 p-3 bg-blue-50 rounded-lg border border-blue-100">
+//                     <p className="text-[#1a73e8] text-sm flex items-center">
+//                         <Zap className="w-4 h-4 mr-2" />
+//                         <strong>বর্তমানে চলছে:</strong> {checkItems[currentCheckIndex]?.label}
+//                     </p>
+//                 </div>
+//             )}
+//             {uploadState.result && (
+//                 <div className="mt-6 p-3 bg-green-50 rounded-lg border border-green-100 text-center">
+//                     <p className="text-[#34A853] font-medium">✅ বিশ্লেষণ সম্পন্ন!</p>
+//                 </div>
+//             )}
+//         </div>
+//     );
+
+//     // --- Updated Google-style Analysis Result ---
+//     const renderAnalysisResult = (data: AnalysisResult) => {
+//         const { summaryScore, strengths, matchingRoles, detailedAnalysis, improvementSuggestions, redFlags } = data;
+
+//         const getScoreColor = (score: number) => {
+//             if (score >= 85) return "text-[#34A853]";
+//             if (score >= 70) return "text-[#1a73e8]";
+//             return "text-[#EA4335]";
+//         };
+
+//         const getPriorityColor = (priority: string) => {
+//             switch (priority) {
+//                 case "high": return "bg-red-50 text-red-800 border-red-200";
+//                 case "medium": return "bg-orange-50 text-orange-800 border-orange-200";
+//                 case "low": return "bg-blue-50 text-blue-800 border-blue-200";
+//                 default: return "bg-gray-50 text-gray-800";
+//             }
+//         };
+
+//         return (
+//             <div className="space-y-8">
+//                 {/* Score Header - Google Style */}
+//                 <div className="text-center p-8 rounded-xl border border-gray-200 bg-white">
+//                     <h3 className="text-xl font-medium text-gray-900 mb-4">রিজিউমি স্কোর</h3>
+//                     <div className="flex items-center justify-center space-x-8">
+//                         <div className="relative w-28 h-28">
+//                             <svg className="w-full h-full" viewBox="0 0 36 36">
+//                                 <path
+//                                     d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+//                                     fill="none"
+//                                     stroke="#E5E7EB"
+//                                     strokeWidth="3"
+//                                 />
+//                                 <path
+//                                     d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+//                                     fill="none"
+//                                     stroke={summaryScore >= 85 ? "#34A853" : summaryScore >= 70 ? "#1a73e8" : "#EA4335"}
+//                                     strokeWidth="3"
+//                                     strokeDasharray={`${summaryScore}, 100`}
+//                                 />
+//                             </svg>
+//                             <div className="absolute inset-0 flex flex-col items-center justify-center">
+//                                 <span className={`text-4xl font-bold ${getScoreColor(summaryScore)}`}>{summaryScore}</span>
+//                                 <span className="text-sm text-gray-500">/100</span>
+//                             </div>
+//                         </div>
+//                         <div className="text-left">
+//                             <p className="text-lg font-medium text-gray-900">
+//                                 {summaryScore >= 85
+//                                     ? "✅ অসাধারণ কাজ!"
+//                                     : summaryScore >= 70
+//                                         ? "✨ ভালো স্কোর"
+//                                         : "⚠️ উন্নতির সুযোগ আছে"
+//                                 }
+//                             </p>
+//                             <p className="text-sm text-gray-500 mt-2">ATS স্ট্যান্ডার্ড অনুযায়ী</p>
+//                         </div>
+//                     </div>
+//                 </div>
+
+//                 {/* Detailed Analysis Metrics - Google Style */}
+//                 <div className="bg-white rounded-xl p-6 border border-gray-200">
+//                     <h4 className="text-xl font-medium text-gray-900 mb-6 flex items-center">
+//                         <BarChart2 className="w-5 h-5 mr-2 text-[#1a73e8]" />
+//                         কোর মেট্রিক্স এনালাইসিস
+//                     </h4>
+//                     <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+//                         {Object.entries(detailedAnalysis).map(([key, value]) => (
+//                             <div key={key} className="text-center p-3 bg-gray-50 rounded-lg border border-gray-200">
+//                                 <div className={`text-2xl font-bold ${getScoreColor(value)} mb-1`}>
+//                                     {value}%
+//                                 </div>
+//                                 <div className="text-xs text-gray-600 capitalize font-medium">
+//                                     {key.replace(/([A-Z])/g, ' $1').trim()}
+//                                 </div>
+//                             </div>
+//                         ))}
+//                     </div>
+//                 </div>
+
+//                 {/* Improvement & Red Flags */}
+//                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+//                     {/* Improvement Suggestions */}
+//                     <div className="bg-white rounded-xl p-6 border border-gray-200">
+//                         <h4 className="text-lg font-medium text-gray-900 mb-4 flex items-center">
+//                             <Lightbulb className="w-5 h-5 mr-2 text-[#FBBC05]" />
+//                             উন্নতির জন্য সুপারিশ
+//                         </h4>
+//                         <div className="space-y-4">
+//                             {improvementSuggestions.map((suggestion, index) => (
+//                                 <div key={index} className={`rounded-lg p-4 border ${getPriorityColor(suggestion.priority)}`}>
+//                                     <div className="flex justify-between items-start mb-2">
+//                                         <h5 className="font-medium text-gray-900">{suggestion.suggestion}</h5>
+//                                         <span className={`px-2 py-1 rounded text-xs font-medium ${getPriorityColor(suggestion.priority)}`}>
+//                                             {suggestion.priority === "high" ? "উচ্চ" : suggestion.priority === "medium" ? "মধ্যম" : "নিম্ন"}
+//                                         </span>
+//                                     </div>
+//                                     <p className="text-gray-700 text-sm mb-2"><strong>কারণ:</strong> {suggestion.reason}</p>
+//                                     <div className="bg-gray-50 p-3 rounded border border-gray-200">
+//                                         <strong className="text-gray-600 text-sm block mb-1">উদাহরণ:</strong>
+//                                         <p className="text-gray-800 text-sm">{suggestion.example}</p>
+//                                     </div>
+//                                 </div>
+//                             ))}
+//                         </div>
+//                     </div>
+
+//                     {/* Red Flags Section */}
+//                     <div className="bg-white rounded-xl p-6 border border-gray-200">
+//                         <h4 className="text-lg font-medium text-gray-900 mb-4 flex items-center">
+//                             <XCircle className="w-5 h-5 mr-2 text-[#EA4335]" />
+//                             গুরুত্বপূর্ণ ইস্যু
+//                         </h4>
+//                         <div className="space-y-4">
+//                             {redFlags.map((flag, index) => (
+//                                 <div key={index} className="bg-white rounded-lg p-4 border border-red-200">
+//                                     <div className="flex items-start">
+//                                         <div className="w-6 h-6 bg-[#EA4335] rounded-full flex items-center justify-center mr-3 mt-1 flex-shrink-0">
+//                                             <Zap className="w-3 h-3 text-white" />
+//                                         </div>
+//                                         <div className="flex-1">
+//                                             <h5 className="font-medium text-red-700">{flag.issue}</h5>
+//                                             <p className="text-red-600 text-sm mt-1"><strong>ইমপ্যাক্ট:</strong> {flag.impact}</p>
+//                                             <p className="text-green-700 text-sm mt-2"><strong>সমাধান:</strong> {flag.solution}</p>
+//                                         </div>
+//                                     </div>
+//                                 </div>
+//                             ))}
+//                         </div>
+//                     </div>
+//                 </div>
+
+//                 {/* Strengths & Matching Roles */}
+//                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+//                     {/* Strengths */}
+//                     <div className="bg-white rounded-xl p-6 border border-gray-200">
+//                         <div className="flex items-center mb-4">
+//                             <Check className="w-5 h-5 text-[#34A853] mr-2" />
+//                             <h4 className="text-lg font-medium text-gray-900">আপনার শক্তিগুলো</h4>
+//                         </div>
+//                         <ul className="space-y-3">
+//                             {strengths.map((s, i) => (
+//                                 <li key={i} className="flex items-start">
+//                                     <Check className="w-4 h-4 text-[#34A853] mr-2 mt-0.5 flex-shrink-0" />
+//                                     <span className="text-gray-700 text-sm">{s}</span>
+//                                 </li>
+//                             ))}
+//                         </ul>
+//                     </div>
+
+//                     {/* Matching Roles */}
+//                     <div className="bg-white rounded-xl p-6 border border-gray-200">
+//                         <div className="flex items-center mb-4">
+//                             <FileText className="w-5 h-5 text-[#1a73e8] mr-2" />
+//                             <h4 className="text-lg font-medium text-gray-900">প্রস্তাবিত ক্যারিয়ার</h4>
+//                         </div>
+//                         <div className="flex flex-wrap gap-2">
+//                             {matchingRoles.map((r, i) => (
+//                                 <span key={i} className="bg-[#1a73e8] text-white px-3 py-2 rounded-lg text-sm font-medium">
+//                                     {r}
+//                                 </span>
+//                             ))}
+//                         </div>
+//                     </div>
+//                 </div>
+//             </div>
+//         );
+//     };
+
+//     // --- Main Render Function ---
+//     return (
+//         <>
+//             <style jsx global>{`
+//                 @keyframes blob {
+//                     0% { transform: translate(0px, 0px) scale(1); }
+//                     33% { transform: translate(30px, -50px) scale(1.1); }
+//                     66% { transform: translate(-20px, 20px) scale(0.9); }
+//                     100% { transform: translate(0px, 0px) scale(1); }
+//                 }
+//                 .animate-blob { animation: blob 7s infinite cubic-bezier(0.6, 0.01, 0.4, 1); }
+//                 .animation-delay-2000 { animation-delay: 2s; }
+//                 .animation-delay-4000 { animation-delay: 4s; }
+//             `}</style>
+
+//             <div id="ResumeUp" className="relative  bg-white flex flex-col items-center p-4 sm:p-8 overflow-hidden">
+//                 {/* Subtle Google-style background elements */}
+//                 <div className="absolute top-10 right-10 w-48 h-48 bg-[#4285F4]/5 rounded-full mix-blend-multiply filter blur-3xl opacity-10"></div>
+//                 <div className="absolute bottom-10 left-10 w-56 h-56 bg-[#34A853]/5 rounded-full mix-blend-multiply filter blur-3xl opacity-10"></div>
+
+//                 <div className="z-10 w-full max-w-7xl space-y-8">
+//                     {analyzing && (
+//                         <div className="bg-white rounded-xl p-8 border border-gray-200 text-center">
+//                             <h3 className="text-2xl font-medium text-gray-900 mb-2">রিজিউমি বিশ্লেষণ চলছে...</h3>
+//                             <p className="text-gray-600 mb-6">দয়া করে অপেক্ষা করুন, এআই আপনার রিপোর্ট তৈরি করছে।</p>
+//                             {renderChecklistSidebar(true)}
+//                         </div>
+//                     )}
+
+//                     {!analyzing && (
+//                         <>
+//                             {/* TOP SECTION: Upload and Checklist */}
+//                             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+//                                 {/* Upload Card */}
+//                                 <div className="lg:col-span-2 bg-white rounded-xl p-6 border border-gray-200 h-full">
+//                                     <div className="text-center mb-6">
+//                                         <h3 className="text-xl font-medium text-gray-900 mb-2">আপনার রিজিউমি আপলোড করুন</h3>
+//                                         <p className="text-gray-600">PDF ফাইল আপলোড করে এআই বিশ্লেষণ পান</p>
+//                                     </div>
+
+//                                     <div
+//                                         className={`w-full h-64 border-2 ${file ? 'border-[#34A853] bg-green-50' : 'border-dashed border-gray-300 bg-gray-50'} rounded-xl flex flex-col items-center justify-center text-gray-500 transition-all duration-300 cursor-pointer hover:border-[#1a73e8] hover:bg-blue-50`}
+//                                         onClick={() => document.getElementById('resumeFileInput')?.click()}
+//                                     >
+//                                         {file ? (
+//                                             <div className="flex flex-col items-center text-center p-4">
+//                                                 <FileText className="h-14 w-14 text-[#34A853] mb-3" />
+//                                                 <span className="text-[#34A853] font-medium text-lg">{file.name}</span>
+//                                                 <span className="text-[#34A853] mt-1">বিশ্লেষণের জন্য প্রস্তুত!</span>
+//                                             </div>
+//                                         ) : (
+//                                             <div className="text-center p-6">
+//                                                 <UploadCloud className="h-16 w-16 text-gray-400 mb-4" />
+//                                                 <p className="text-lg font-medium text-gray-700 mb-2">PDF ফাইল ড্রপ করুন</p>
+//                                                 <p className="text-gray-600">অথবা ক্লিক করে সিলেক্ট করুন</p>
+//                                                 <p className="text-sm text-gray-500 mt-3">সাপোর্টেড: .pdf</p>
+//                                             </div>
+//                                         )}
+//                                         <input
+//                                             id="resumeFileInput"
+//                                             type="file"
+//                                             accept=".pdf"
+//                                             onChange={handleFileChange}
+//                                             className="hidden"
+//                                         />
+//                                     </div>
+
+//                                     <button
+//                                         onClick={handleAnalyze}
+//                                         disabled={!file}
+//                                         className={`mt-6 w-full py-3 rounded-lg font-medium text-sm transition-all duration-200 ${!file
+//                                             ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+//                                             : "bg-[#1a73e8] hover:bg-[#1967d2] text-white shadow-sm hover:shadow-md"
+//                                             }`}
+//                                     >
+//                                         রিজিউমি বিশ্লেষণ করুন
+//                                     </button>
+
+//                                     {uploadState.error && (
+//                                         <div className="mt-4 p-3 bg-red-50 border border-red-200 text-red-700 rounded-lg text-sm">
+//                                             <div className="flex items-center">
+//                                                 <XCircle className="w-4 h-4 mr-2" />
+//                                                 {uploadState.error}
+//                                             </div>
+//                                         </div>
+//                                     )}
+//                                 </div>
+
+//                                 {/* Checklist Sidebar */}
+//                                 <div className="lg:col-span-1">
+//                                     {renderChecklistSidebar(false)}
+//                                 </div>
+//                             </div>
+
+//                             {/* BOTTOM SECTION: Results */}
+//                             {uploadState.result && (
+//                                 <div className="w-full bg-white rounded-xl border border-gray-200">
+//                                     <div className="bg-gray-50 p-6 border-b border-gray-200">
+//                                         <h3 className="text-2xl font-medium text-gray-900 flex items-center">
+//                                             <FileText className="w-6 h-6 mr-3 text-[#1a73e8]" />
+//                                             রিজিউমি বিশ্লেষণ রিপোর্ট
+//                                         </h3>
+//                                         <p className="text-gray-600 mt-1">আপনার ক্যারিয়ার উন্নতির জন্য ব্যক্তিগতকৃত রিপোর্ট</p>
+//                                     </div>
+//                                     <div className="p-6">
+//                                         {renderAnalysisResult(uploadState.result)}
+//                                     </div>
+//                                 </div>
+//                             )}
+//                         </>
+//                     )}
+//                 </div>
+//             </div>
+//         </>
+//     );
+// }
+
+
 'use client'
 import React, { useState } from "react";
-import { Check, Loader2, FileText, UploadCloud, XCircle, BarChart2, Zap, Lightbulb } from 'lucide-react';
+import { Check, Loader2, FileText, UploadCloud, XCircle, BarChart2, Zap, Lightbulb, TrendingUp, TrendingDown } from 'lucide-react';
 
-// --- Type Definitions (Unchanged) ---
+// --- Updated Type Definitions ---
 interface AnalysisResult {
     summaryScore: number;
     strengths: string[];
@@ -536,6 +1050,7 @@ interface AnalysisResult {
     improvementSuggestions: {
         suggestion: string;
         reason: string;
+        originalTextSnippet?: string; // ⭐️ নতুন ফিল্ড: ব্যবহারকারীকে বোঝাতে সাহায্য করবে পুরোনো টেক্সট কোনটি
         example: string;
         priority: "high" | "medium" | "low";
     }[];
@@ -569,20 +1084,20 @@ export default function ResumeUpload() {
     const [uploadState, setUploadState] = useState<UploadState>(initialState);
     const [checkItems, setCheckItems] = useState<CheckItem[]>([]);
     const [currentCheckIndex, setCurrentCheckIndex] = useState<number>(0);
+    const [showResults, setShowResults] = useState<boolean>(false);
 
     const analysisChecklist: CheckItem[] = [
-        { id: "file-format", label: "PDF ফাইল ফরম্যাট চেক করা হচ্ছে", completed: false },
-        { id: "text-extraction", label: "রিজিউমি টেক্সট এক্সট্র্যাক্ট করা হচ্ছে", completed: false },
+        { id: "file-format", label: "ফাইল ফরম্যাট ও স্ক্যানিং যাচাই", completed: false },
+        { id: "text-extraction", label: "টেক্সট এক্সট্র্যাকশন ও ডেটা ক্লিনজিং", completed: false },
         { id: "ats-scan", label: "ATS কম্প্যাটিবিলিটি স্ক্যান", completed: false },
-        { id: "keyword-analysis", label: "কীওয়ার্ড ও অপ্টিমাইজেশন এনালাইসিস", completed: false },
-        { id: "structure-check", label: "স্ট্রাকচার ও ফরম্যাটিং চেক", completed: false },
-        { id: "content-quality", label: "কন্টেন্ট কোয়ালিটি অ্যাসেসমেন্ট", completed: false },
-        { id: "impact-metrics", label: "ইমপ্যাক্ট মেট্রিক্স এনালাইসিস", completed: false },
-        { id: "role-matching", label: "জব রোল ম্যাচিং", completed: false },
-        { id: "final-scoring", label: "ফাইনাল স্কোরিং ও রিপোর্ট জেনারেট", completed: false },
+        { id: "keyword-analysis", label: "কীওয়ার্ড ডেনসিটি এবং স্কিল ম্যাপিং", completed: false },
+        { id: "context-analysis", label: "কাজের অভিজ্ঞতা ও প্রজেক্ট কনটেক্সট বিশ্লেষণ", completed: false },
+        { id: "impact-metrics", label: "পরিমাপযোগ্য অর্জন (Quantifiable Impact) যাচাই", completed: false },
+        { id: "structure-check", label: "রেজুমে স্ট্রাকচার ও ফরম্যাটিং মূল্যায়ন", completed: false },
+        { id: "role-matching", label: "প্রযুক্তিগত দক্ষতার ভিত্তিতে রোল ম্যাচিং", completed: false },
+        { id: "report-generation", label: "ব্যক্তিগতকৃত পরামর্শ সহ চূড়ান্ত রিপোর্ট তৈরি", completed: false },
     ];
 
-    // Initialize checklist when component mounts
     React.useEffect(() => {
         setCheckItems(analysisChecklist.map(item => ({ ...item, completed: false })));
     }, []);
@@ -598,19 +1113,24 @@ export default function ResumeUpload() {
         setUploadState(initialState);
         setCheckItems(analysisChecklist.map(item => ({ ...item, completed: false })));
         setCurrentCheckIndex(0);
+        setShowResults(false);
     };
 
-    const simulateCheckProgress = async () => {
-        for (let i = 0; i < analysisChecklist.length; i++) {
-            await new Promise(resolve => setTimeout(resolve, 300 + Math.random() * 400));
-            setCurrentCheckIndex(i);
+    /**
+     * Updates the checklist progress bar during analysis with realistic timing.
+     */
+    const updateChecklist = async (index: number, minTime: number = 300) => {
+        if (index < analysisChecklist.length) {
+            await new Promise(resolve => setTimeout(resolve, minTime + Math.random() * 200));
+            setCurrentCheckIndex(index);
             setCheckItems(prev =>
-                prev.map((item, index) =>
-                    index <= i ? { ...item, completed: true } : item
+                prev.map((item, i) =>
+                    i <= index ? { ...item, completed: true } : item
                 )
             );
         }
     };
+
 
     const handleAnalyze = async () => {
         if (!file) {
@@ -622,72 +1142,92 @@ export default function ResumeUpload() {
         setUploadState(initialState);
         setCheckItems(analysisChecklist.map(item => ({ ...item, completed: false })));
         setCurrentCheckIndex(0);
+        setShowResults(false);
 
         try {
-            await simulateCheckProgress();
+            // 1. Check file format (Quick)
+            await updateChecklist(0, 100);
 
-            // --- Simulation (Replace with actual fetch calls) ---
-            const simulateAnalysisResult: AnalysisResult = {
-                summaryScore: 88,
-                strengths: [
-                    "জব মার্কেটের জন্য প্রাসঙ্গিক শক্তিশালী কীওয়ার্ড",
-                    "স্পষ্ট এবং সংক্ষিপ্ত প্রোফেশনাল সামারি",
-                    "কাজের অভিজ্ঞতায় পরিমাপযোগ্য অর্জন (কোয়ান্টিফায়েড রেজাল্ট)",
-                    "প্রযুক্তিগত দক্ষতা ভালোভাবে ও সুগঠিতভাবে উপস্থাপন",
-                ],
-                weaknesses: [
-                    "কিছু বুলেট পয়েন্টে আরও নির্দিষ্ট মেট্রিক্স যোগ করা যেতে পারে",
-                    "কিছু অংশে বাক্য গঠন আরও সংক্ষিপ্ত করা প্রয়োজন",
-                ],
-                matchingRoles: [
-                    "সিনিয়র সফটওয়্যার ইঞ্জিনিয়ার",
-                    "ডাটা আর্কিটেক্ট",
-                    "টেক লিড",
-                    "AI/ML ইঞ্জিনিয়ার",
-                    "ক্লাউড সলিউশন কনসালটেন্ট",
-                ],
-                detailedAnalysis: {
-                    atsCompatibility: 92,
-                    contentQuality: 85,
-                    keywordOptimization: 90,
-                    structure: 88,
-                    impactMetrics: 78
+            // --- STEP 2: Extract text from PDF (Call /api/extract) ---
+            await updateChecklist(1, 400); // Text Extraction takes a moment
+            const formData = new FormData();
+            formData.append("file", file);
+
+            const extractRes = await fetch("/api/extract", {
+                method: "POST",
+                body: formData,
+            });
+
+            const extractData = await extractRes.json();
+            if (!extractRes.ok || extractData.error) {
+                throw new Error(extractData.error || `Extraction failed with status ${extractRes.status}`);
+            }
+
+            const text: string = extractData.text;
+
+
+            // --- STEP 3-7: Core Analysis Steps (Simulated progress during the main API call) ---
+
+            // Advance checklist visually to ATS Scan
+            await updateChecklist(2, 250);
+            // Advance checklist visually to Keyword Mapping
+            await updateChecklist(3, 250);
+
+            // Start the main AI Analysis call
+            const analyzePromise = fetch("/api/analyze", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
                 },
-                improvementSuggestions: [
-                    {
-                        suggestion: "স্কিলের সাথে প্রজেক্ট লিঙ্ক করুন",
-                        reason: "স্কিলগুলি বাস্তবে কীভাবে ব্যবহার করেছেন তা দেখানো হয়নি",
-                        example: "'Node.js' ব্যবহার করে একটি 'Scalable API Gateway' তৈরির প্রজেক্ট যোগ করুন",
-                        priority: "medium"
-                    },
-                    {
-                        suggestion: "কাস্টমাইজড সামারি লিখুন",
-                        reason: "প্রতিটি জবের জন্য সামারি কাস্টমাইজ করলে ATS স্কোর বাড়ে",
-                        example: "জব ডেস্ক্রিপশন থেকে মূল কীওয়ার্ডগুলি সামারিতে ব্যবহার করুন",
-                        priority: "low"
-                    }
-                ],
-                redFlags: [
-                    {
-                        issue: "শিক্ষাগত যোগ্যতার তারিখ উল্টোপাল্টা",
-                        impact: "রিক্রুটাররা বিভ্রান্ত হয়, প্রফেশনালিজম প্রশ্নবিদ্ধ হতে পারে",
-                        solution: "সর্বশেষ ডিগ্রি প্রথমে রেখে ক্রমানুসারে সাজান (Reverse Chronological)"
-                    },
-                ]
+                body: JSON.stringify({ resumeText: text }),
+            });
+
+            // Continue advancing checklist while waiting for the main AI call
+            await updateChecklist(4, 500); // Context Analysis (Deep AI processing)
+            await updateChecklist(5, 500); // Impact Metrics
+            await updateChecklist(6, 300); // Structure Check
+
+            // Wait for the main AI call result
+            const analyzeRes = await analyzePromise;
+
+            // Advance checklist to Role Matching after API response is received
+            await updateChecklist(7, 100);
+
+            const analyzeData = await analyzeRes.json();
+
+            if (!analyzeRes.ok || analyzeData.error) {
+                throw new Error(analyzeData.error || `Analysis failed with status ${analyzeRes.status}`);
+            }
+
+            // ⭐️ Mapping the API result to the required structure, including placeholders for the new field
+            const result: AnalysisResult = {
+                ...analyzeData.result,
+                improvementSuggestions: analyzeData.result.improvementSuggestions.map((suggestion: any) => ({
+                    ...suggestion,
+                    // ⭐️ এই অংশটি ধরে নেওয়া হচ্ছে যে আপনার API এখন এই ডেটা দিচ্ছে
+                    originalTextSnippet: suggestion.originalTextSnippet || "রিজিউমির নির্দিষ্ট অংশ খুঁজে পাওয়া যায়নি বা আপনার এই অংশটি দুর্বল",
+                }))
             };
 
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            setUploadState({ result: simulateAnalysisResult, error: undefined });
+            // --- STEP 9: Final scoring and report generation ---
+            await updateChecklist(8, 100);
+
+            setUploadState({ result: result, error: undefined });
+            // Trigger animation for result blocks
+            await new Promise(resolve => setTimeout(resolve, 50));
+            setShowResults(true);
 
         } catch (err: unknown) {
             const message = err instanceof Error ? err.message : String(err);
             setUploadState({ result: null, error: message || "বিশ্লেষণের সময় একটি অপ্রত্যাশিত ত্রুটি ঘটেছে" });
+            setCurrentCheckIndex(analysisChecklist.length - 1);
         } finally {
             setAnalyzing(false);
         }
     };
 
-    // --- Updated Google-style Checklist Sidebar ---
+    // --- Checklist Sidebar ---
     const renderChecklistSidebar = (isAnalyzing: boolean) => (
         <div className="bg-white rounded-xl p-6 border border-gray-200 h-full">
             <h4 className="text-lg font-medium text-gray-900 mb-4 flex items-center">
@@ -697,15 +1237,16 @@ export default function ResumeUpload() {
             <div className="space-y-3">
                 {checkItems.map((item, index) => (
                     <div key={item.id} className="flex items-center">
-                        <div className={`w-6 h-6 rounded-full flex items-center justify-center mr-3 flex-shrink-0 ${item.completed
+                        <div className={`w-6 h-6 rounded-full flex items-center justify-center mr-3 flex-shrink-0 transition-colors duration-300 ${item.completed
                             ? "bg-[#34A853]"
                             : isAnalyzing && index === currentCheckIndex
                                 ? "bg-[#1a73e8]"
                                 : "bg-gray-200"
                             }`}>
                             {item.completed ? (
-                                <Check className="w-4 h-4 text-white" />
+                                <Check className="w-4 h-4 text-white animated-check" />
                             ) : isAnalyzing && index === currentCheckIndex ? (
+                                // ⭐️ লোডিং অবস্থায় লোডার দেখানো নিশ্চিত করা হলো
                                 <Loader2 className="w-4 h-4 text-white animate-spin" />
                             ) : (
                                 <span className="text-sm text-gray-500">
@@ -713,7 +1254,7 @@ export default function ResumeUpload() {
                                 </span>
                             )}
                         </div>
-                        <span className={`text-sm ${item.completed
+                        <span className={`text-sm transition-colors duration-300 ${item.completed
                             ? "text-[#34A853] font-medium"
                             : isAnalyzing && index === currentCheckIndex
                                 ? "text-[#1a73e8] font-medium"
@@ -740,7 +1281,7 @@ export default function ResumeUpload() {
         </div>
     );
 
-    // --- Updated Google-style Analysis Result ---
+    // --- Updated Google-style Analysis Result (Improved display) ---
     const renderAnalysisResult = (data: AnalysisResult) => {
         const { summaryScore, strengths, matchingRoles, detailedAnalysis, improvementSuggestions, redFlags } = data;
 
@@ -762,7 +1303,9 @@ export default function ResumeUpload() {
         return (
             <div className="space-y-8">
                 {/* Score Header - Google Style */}
-                <div className="text-center p-8 rounded-xl border border-gray-200 bg-white">
+                <div className="text-center p-8 rounded-xl border border-gray-200 bg-white transition-all duration-500 ease-out"
+                    style={{ transform: showResults ? 'translateY(0)' : 'translateY(20px)', opacity: showResults ? 1 : 0 }}
+                >
                     <h3 className="text-xl font-medium text-gray-900 mb-4">রিজিউমি স্কোর</h3>
                     <div className="flex items-center justify-center space-x-8">
                         <div className="relative w-28 h-28">
@@ -801,7 +1344,9 @@ export default function ResumeUpload() {
                 </div>
 
                 {/* Detailed Analysis Metrics - Google Style */}
-                <div className="bg-white rounded-xl p-6 border border-gray-200">
+                <div className="bg-white rounded-xl p-6 border border-gray-200 transition-all duration-500 ease-out delay-100"
+                    style={{ transform: showResults ? 'translateY(0)' : 'translateY(20px)', opacity: showResults ? 1 : 0 }}
+                >
                     <h4 className="text-xl font-medium text-gray-900 mb-6 flex items-center">
                         <BarChart2 className="w-5 h-5 mr-2 text-[#1a73e8]" />
                         কোর মেট্রিক্স এনালাইসিস
@@ -813,7 +1358,12 @@ export default function ResumeUpload() {
                                     {value}%
                                 </div>
                                 <div className="text-xs text-gray-600 capitalize font-medium">
-                                    {key.replace(/([A-Z])/g, ' $1').trim()}
+                                    {/* Simplified key presentation */}
+                                    {key === "atsCompatibility" && "ATS কম্প্যাটিবিলিটি"}
+                                    {key === "contentQuality" && "কন্টেন্ট কোয়ালিটি"}
+                                    {key === "keywordOptimization" && "কীওয়ার্ড অপ্টিমাইজেশন"}
+                                    {key === "structure" && "স্ট্রাকচার"}
+                                    {key === "impactMetrics" && "ইমপ্যাক্ট মেট্রিক্স"}
                                 </div>
                             </div>
                         ))}
@@ -822,25 +1372,41 @@ export default function ResumeUpload() {
 
                 {/* Improvement & Red Flags */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    {/* Improvement Suggestions */}
-                    <div className="bg-white rounded-xl p-6 border border-gray-200">
+                    {/* Improvement Suggestions (Most Important Section) */}
+                    <div className="bg-white rounded-xl p-6 border border-gray-200 transition-all duration-500 ease-out delay-200"
+                        style={{ transform: showResults ? 'translateY(0)' : 'translateY(20px)', opacity: showResults ? 1 : 0 }}
+                    >
                         <h4 className="text-lg font-medium text-gray-900 mb-4 flex items-center">
                             <Lightbulb className="w-5 h-5 mr-2 text-[#FBBC05]" />
-                            উন্নতির জন্য সুপারিশ
+                            উন্নতির জন্য সুপারিশ (আপনার যা লেখা উচিত)
                         </h4>
                         <div className="space-y-4">
                             {improvementSuggestions.map((suggestion, index) => (
                                 <div key={index} className={`rounded-lg p-4 border ${getPriorityColor(suggestion.priority)}`}>
                                     <div className="flex justify-between items-start mb-2">
-                                        <h5 className="font-medium text-gray-900">{suggestion.suggestion}</h5>
+                                        <h5 className="font-bold text-gray-900 flex items-center">
+                                            {suggestion.priority === "high" ? <TrendingDown className="w-4 h-4 text-red-500 mr-2" /> : <TrendingUp className="w-4 h-4 text-blue-500 mr-2" />}
+                                            {suggestion.suggestion}
+                                        </h5>
                                         <span className={`px-2 py-1 rounded text-xs font-medium ${getPriorityColor(suggestion.priority)}`}>
-                                            {suggestion.priority === "high" ? "উচ্চ" : suggestion.priority === "medium" ? "মধ্যম" : "নিম্ন"}
+                                            {suggestion.priority === "high" ? "উচ্চ অগ্রাধিকার" : suggestion.priority === "medium" ? "মধ্যম অগ্রাধিকার" : "নিম্ন অগ্রাধিকার"}
                                         </span>
                                     </div>
                                     <p className="text-gray-700 text-sm mb-2"><strong>কারণ:</strong> {suggestion.reason}</p>
-                                    <div className="bg-gray-50 p-3 rounded border border-gray-200">
-                                        <strong className="text-gray-600 text-sm block mb-1">উদাহরণ:</strong>
-                                        <p className="text-gray-800 text-sm">{suggestion.example}</p>
+
+                                    {/* ⭐️ নতুন: পুরোনো টেক্সট দেখানো হচ্ছে */}
+                                    {suggestion.originalTextSnippet && (
+                                        <div className="bg-gray-100 p-3 rounded border border-gray-300 shadow-inner mt-3 mb-3">
+                                            <strong className="text-gray-600 text-sm block mb-1">আপনার বর্তমান টেক্সট:</strong>
+                                            <p className="text-gray-700 text-sm italic border-l-2 border-red-400 pl-2">
+                                                "{suggestion.originalTextSnippet}"
+                                            </p>
+                                        </div>
+                                    )}
+
+                                    <div className="bg-green-50 p-3 rounded border border-green-300 shadow-inner">
+                                        <strong className="text-green-800 text-sm block mb-1">পরিবর্তে যা লিখবেন:</strong>
+                                        <p className="text-gray-800 text-sm italic font-medium">"{suggestion.example}"</p>
                                     </div>
                                 </div>
                             ))}
@@ -848,14 +1414,16 @@ export default function ResumeUpload() {
                     </div>
 
                     {/* Red Flags Section */}
-                    <div className="bg-white rounded-xl p-6 border border-gray-200">
+                    <div className="bg-white rounded-xl p-6 border border-gray-200 transition-all duration-500 ease-out delay-300"
+                        style={{ transform: showResults ? 'translateY(0)' : 'translateY(20px)', opacity: showResults ? 1 : 0 }}
+                    >
                         <h4 className="text-lg font-medium text-gray-900 mb-4 flex items-center">
                             <XCircle className="w-5 h-5 mr-2 text-[#EA4335]" />
-                            গুরুত্বপূর্ণ ইস্যু
+                            গুরুত্বপূর্ণ ইস্যু (অবিলম্বে সংশোধন করুন)
                         </h4>
                         <div className="space-y-4">
                             {redFlags.map((flag, index) => (
-                                <div key={index} className="bg-white rounded-lg p-4 border border-red-200">
+                                <div key={index} className="bg-white rounded-lg p-4 border border-red-200 shadow-md">
                                     <div className="flex items-start">
                                         <div className="w-6 h-6 bg-[#EA4335] rounded-full flex items-center justify-center mr-3 mt-1 flex-shrink-0">
                                             <Zap className="w-3 h-3 text-white" />
@@ -875,7 +1443,9 @@ export default function ResumeUpload() {
                 {/* Strengths & Matching Roles */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     {/* Strengths */}
-                    <div className="bg-white rounded-xl p-6 border border-gray-200">
+                    <div className="bg-white rounded-xl p-6 border border-gray-200 transition-all duration-500 ease-out delay-400"
+                        style={{ transform: showResults ? 'translateY(0)' : 'translateY(20px)', opacity: showResults ? 1 : 0 }}
+                    >
                         <div className="flex items-center mb-4">
                             <Check className="w-5 h-5 text-[#34A853] mr-2" />
                             <h4 className="text-lg font-medium text-gray-900">আপনার শক্তিগুলো</h4>
@@ -891,7 +1461,9 @@ export default function ResumeUpload() {
                     </div>
 
                     {/* Matching Roles */}
-                    <div className="bg-white rounded-xl p-6 border border-gray-200">
+                    <div className="bg-white rounded-xl p-6 border border-gray-200 transition-all duration-500 ease-out delay-500"
+                        style={{ transform: showResults ? 'translateY(0)' : 'translateY(20px)', opacity: showResults ? 1 : 0 }}
+                    >
                         <div className="flex items-center mb-4">
                             <FileText className="w-5 h-5 text-[#1a73e8] mr-2" />
                             <h4 className="text-lg font-medium text-gray-900">প্রস্তাবিত ক্যারিয়ার</h4>
@@ -913,6 +1485,7 @@ export default function ResumeUpload() {
     return (
         <>
             <style jsx global>{`
+                /* Background Blob Animation */
                 @keyframes blob {
                     0% { transform: translate(0px, 0px) scale(1); }
                     33% { transform: translate(30px, -50px) scale(1.1); }
@@ -922,6 +1495,24 @@ export default function ResumeUpload() {
                 .animate-blob { animation: blob 7s infinite cubic-bezier(0.6, 0.01, 0.4, 1); }
                 .animation-delay-2000 { animation-delay: 2s; }
                 .animation-delay-4000 { animation-delay: 4s; }
+
+                /* Checkmark Entrance Animation */
+                .animated-check {
+                    animation: check-in 0.3s ease-out forwards;
+                    opacity: 0;
+                    transform: scale(0.5);
+                }
+
+                @keyframes check-in {
+                    0% {
+                        opacity: 0;
+                        transform: scale(0.5);
+                    }
+                    100% {
+                        opacity: 1;
+                        transform: scale(1);
+                    }
+                }
             `}</style>
 
             <div id="ResumeUp" className="relative  bg-white flex flex-col items-center p-4 sm:p-8 overflow-hidden">
