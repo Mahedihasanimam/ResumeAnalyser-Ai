@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 function Live_demo() {
@@ -58,15 +59,16 @@ function Live_demo() {
                 {/* Video Placeholder (Main Feature) - Enhanced Google Style */}
                 <div className="mt-10 mb-20 max-w-5xl mx-auto">
                     <div className="relative w-full aspect-video bg-gray-100 rounded-2xl shadow-2xl overflow-hidden border-4 border-[#4285F4]">
-                        {/* Placeholder for Video Player */}
-                        <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center backdrop-blur-sm">
-                            {/* Play Button Icon */}
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" className="w-24 h-24 text-[#EA4335] opacity-90 mb-4 cursor-pointer hover:scale-105 transition-transform duration-200">
-                                <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM11 16.5V7.5L17 12L11 16.5Z" />
-                            </svg>
-                            <p className="text-2xl font-semibold text-gray-800">প্লে বাটনে ক্লিক করুন</p>
-                            <p className="text-base text-gray-600 mt-1">পূর্ণাঙ্গ ডেমো ভিডিওটি দেখতে পাবেন</p>
-                        </div>
+                        {/* Responsive YouTube iframe */}
+                        <iframe
+                            className="absolute inset-0 w-full h-full"
+                            src="https://www.youtube.com/embed/x_DIy7KL7q4?si=4RP4WDedcpJ_2pIm"
+                            title="Live Demo Video"
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerPolicy="strict-origin-when-cross-origin"
+                            allowFullScreen
+                        />
                     </div>
                 </div>
 
@@ -96,12 +98,12 @@ function Live_demo() {
                     <p className="text-xl text-gray-600 mb-8">
                         আপনার সিভি অপটিমাইজ করা শুরু করুন এবং আপনার ড্রিম জবের দিকে প্রথম ধাপ নিন।
                     </p>
-                    <a
-                        href="/analyze" // Link to the analysis page
+                    <Link
+                        href="/" // Link to the analysis page
                         className="inline-flex items-center justify-center px-12 py-4 border border-transparent text-xl font-medium rounded-full shadow-2xl text-white bg-[#34A853] hover:bg-[#287d40] transition duration-300 transform hover:scale-105 uppercase tracking-wider"
                     >
                         বিনামূল্যে বিশ্লেষণ শুরু করুন
-                    </a>
+                    </Link>
                 </div>
 
             </div>
